@@ -12,7 +12,9 @@ const Review = require('../models/review');
 const getReviews = async (req, res) => {
   try {
     const reviews = await Review.find().sort({createdAt: -1});
-    res.status(200).json(reviews);
+    // Setting an incorrect content type while sending JSON data
+    res.set('Content-Type', 'application/xml');
+    res.status(200).send(JSON.stringify(reviews));
   } catch (error) {
     throw error;
   }
@@ -21,8 +23,7 @@ const getReviews = async (req, res) => {
 const createReviews = async (req, res) => {
     try{
         const review = await Review.create(req.body);
-        res.set('Content-Type', 'application/xml');
-        res.status(200).send(JSON.stringify(review));
+        res.status(200).json(review);
     } catch( error) {
         throw error;
     }
