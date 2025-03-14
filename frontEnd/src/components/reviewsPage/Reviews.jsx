@@ -156,7 +156,7 @@ export const Reviews = () => {
           </div>
         </div>
         <div className="reviews-grid">
-{/*           {reviews.map((review) => {
+          {reviews.map((review) => {
             return (
               <SingleReview
                 preset={review.fullName}
@@ -165,8 +165,7 @@ export const Reviews = () => {
                 date={review.date}
               />
             );
-          })} */}
-          Error Loading Data...
+          })}
         </div>
       </div>
     </div>
