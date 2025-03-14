@@ -12,11 +12,15 @@ const Review = require('../models/review');
 const getReviews = async (req, res) => {
   try {
     const reviews = await Review.find().sort({createdAt: -1});
-    // Setting an incorrect content type while sending JSON data
-    res.set('Content-Type', 'application/xml');
+    
+    // This content type mismatch will be clearly visible in the browser's network tab
+    // It tells the browser to expect an image, but sends JSON data instead
+    res.set('Content-Type', 'image/png');
+    
+    // Send the JSON data as a string
     res.status(200).send(JSON.stringify(reviews));
   } catch (error) {
-    throw error;
+    res.status(500).json({ error: error.message });
   }
 };
 
